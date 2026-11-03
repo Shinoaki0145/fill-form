@@ -1,0 +1,46 @@
+[project]
+name = "fill-form"
+version = "0.1.0"
+description = "Vietnamese voice form with Silero VAD and Gipformer"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "gradio==6.30.0", "soxr==1.1.0",
+  "numpy>=1.26,<3", "scipy>=1.12,<2", "soundfile>=0.12,<1",
+  "python-dotenv>=1,<2", "huggingface-hub>=0.25,<2",
+]
+
+[project.optional-dependencies]
+dev = ["playwright>=1.55,<2"]
+cuda = [
+  "torch==2.8.0", "torchaudio==2.8.0", "silero-vad==6.2.0",
+  "k2==1.24.4.dev20250807+cuda12.8.torch2.8.0",
+  "kaldifeat==1.25.5.dev20250807+cuda12.8.torch2.8.0",
+  "sentencepiece==0.2.1", "kaldialign", "pypinyin==0.50.0", "tensorboard",
+]
+
+[tool.uv]
+package = false
+environments = ["sys_platform == 'linux' and platform_machine == 'x86_64'"]
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[[tool.uv.index]]
+name = "k2"
+url = "https://k2-fsa.github.io/k2/cuda.html"
+format = "flat"
+explicit = true
+
+[[tool.uv.index]]
+name = "kaldifeat"
+url = "https://csukuangfj.github.io/kaldifeat/cuda.html"
+format = "flat"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu128" }
+torchaudio = { index = "pytorch-cu128" }
+k2 = { index = "k2" }
+kaldifeat = { index = "kaldifeat" }

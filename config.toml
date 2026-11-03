@@ -1,0 +1,4 @@
+[asr]
+repo = "vendor/gipformer"
+icefall = "vendor/icefall"
+model_dir = "models/gipformer1.5-68M-rnnt"
